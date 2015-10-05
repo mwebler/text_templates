@@ -1,19 +1,19 @@
 {
-  "manifest_version": 2,
-  "name": "test",
-  "short_name": "test",
-  "description": "",
-  "version": "0.0.1",
-  "minimum_chrome_version": "38",
-
-  "icons": {
-    "16": "assets/icon_16.png",
-    "128": "assets/icon_128.png"
+  "name" : "MyTextTemplates",
+  "version" : "0.1",
+  "description" : "A text template manager",
+  "permissions": [
+    "tabs"
+  ],
+  "browser_action": {
+     "default_icon": "assets/icon.png"
   },
-
-  "app": {
-    "background": {
-      "scripts": ["background.js"]
-    }
-  }
+  "icons": { "16": "assets/icon-16.png", "128": "assets/icon-128.png" },
+  "background": {
+    "scripts": [
+      "background.js"
+    ],
+    "persistent": false
+  },
+  "manifest_version": 2
 }

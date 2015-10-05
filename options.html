@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>TextTemplates</title>
+
+  <meta charset="utf-8">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+
+  <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+
+  <!-- Optional theme -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+
+  <!-- Latest compiled and minified JavaScript -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+  <script src="//cdn.ckeditor.com/4.5.3/standard/ckeditor.js"></script>
+
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+
+<body>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-sm-3 col-md-2 sidebar">
+        <ul class="nav nav-sidebar">
+          <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">My Templates</a></li>
+          <li role="presentation"><a href="#import" aria-controls="import" role="tab" data-toggle="tab">Import</a></li>
+          <li role="presentation"><a href="#export" aria-controls="export" role="tab" data-toggle="tab">Export</a></li>
+          <li role="presentation"><a href="#help" aria-controls="help" role="tab" data-toggle="tab">Help</a></li>
+          <li role="presentation"><a href="#about" aria-controls="about" role="tab" data-toggle="tab">About</a></li>
+          <li role="presentation"><a href="#editor" aria-controls="editor" role="tab" data-toggle="tab">Editor</a></li>
+        </ul>
+      </div>
+      <div id="teste" class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2">
+        <!-- Tab panes -->
+        <div class="tab-content">
+          <div role="tabpanel" class="tab-pane active" id="home">
+            <nav class="navbar navbar-toolbar navbar-default">
+
+                <div class="navbar navbar-toolbar navbar-default">
+                  <ul class="nav navbar-nav navbar-left">
+                    <li><a href="#editor">
+                          <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>
+                          New Template
+                        </a>
+                    </li>
+                  </ul>
+                  <form class="navbar-form navbar-right" role="search">
+                    <div class="form-group">
+                      <input type="text" class="form-control" placeholder="Search">
+                    </div>
+                  </form>
+                </div>
+            </nav>
+          </div>
+          <div role="tabpanel" class="tab-pane" id="import">prof</div>
+          <div role="tabpanel" class="tab-pane" id="export">mes</div>
+          <div role="tabpanel" class="tab-pane" id="help">set</div>
+          <div role="tabpanel" class="tab-pane" id="about">about</div>
+          <div role="tabpanel" class="tab-pane" id="editor">
+            <form>
+            <textarea name="editor1" id="editor1" rows="10" cols="80">
+                This is my textarea to be replaced with CKEditor.
+            </textarea>
+            <script>
+                // Replace the <textarea id="editor1"> with a CKEditor
+                // instance, using default configuration.
+                CKEDITOR.replace( 'editor1' );
+            </script>
+        </form>
+        <button id="savetext">
+              Salvar
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/main.js"></script>
+</body>
+
+</html>

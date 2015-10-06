@@ -39,55 +39,48 @@
           <li role="presentation"><a href="#export" aria-controls="export" role="tab" data-toggle="tab">Export</a></li>
           <li role="presentation"><a href="#help" aria-controls="help" role="tab" data-toggle="tab">Help</a></li>
           <li role="presentation"><a href="#about" aria-controls="about" role="tab" data-toggle="tab">About</a></li>
-          <li role="presentation"><a href="#editor" aria-controls="editor" role="tab" data-toggle="tab">Editor</a></li>
+
         </ul>
       </div>
       <div id="teste" class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2">
         <!-- Tab panes -->
         <div class="tab-content">
           <div role="tabpanel" class="tab-pane active" id="home">
-            <nav class="navbar navbar-toolbar navbar-default">
-
-              <div class="navbar navbar-toolbar navbar-default">
-                <ul class="nav navbar-nav navbar-left">
-                  <li>
+            
+            <div class="panel panel-default">
+              <!-- Default panel contents -->
+              <div class="panel-heading">
+                <div class="row">
+                  <div class="col-xs-6 col-md-6">
                     <button id="new-template" class="btn btn-primary">
                       <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span> New Template
                     </button>
-                  </li>
-                </ul>
-                <form class="navbar-form navbar-right" role="search">
-                  <div class="form-group">
-                    <input type="text" class="form-control" placeholder="Search">
                   </div>
-                </form>
+                  <div class="col-xs-6 col-md-6">
+                    <div class="form-group">
+                      <input type="text" class="form-control" placeholder="Search">
+                    </div>
+                  </div>
+                </div>
               </div>
-            </nav>
+              <div class="panel-body">
+                <p>...</p>
+              </div>
+            
+              <!-- List group -->
+              <ul class="list-group">
+                <li class="list-group-item">Cras justo odio</li>
+                <li class="list-group-item">Dapibus ac facilisis in</li>
+                <li class="list-group-item">Morbi leo risus</li>
+                <li class="list-group-item">Porta ac consectetur ac</li>
+                <li class="list-group-item">Vestibulum at eros</li>
+              </ul>
+            </div>
           </div>
           <div role="tabpanel" class="tab-pane" id="import">prof</div>
           <div role="tabpanel" class="tab-pane" id="export">mes</div>
           <div role="tabpanel" class="tab-pane" id="help">set</div>
           <div role="tabpanel" class="tab-pane" id="about">about</div>
-          <div role="tabpanel" class="tab-pane" id="editor">
-
-
-            <button id="savetext">
-              Salvar
-            </button>
-
-
-            <!-- Large modal -->
-            <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-lg">Large modal</button>
-
-            <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
-              <div class="modal-dialog modal-lg">
-                <div class="modal-content">
-                  <iframe src="editor.html"></iframe>
-                </div>
-              </div>
-            </div>
-
-          </div>
         </div>
       </div>
     </div>

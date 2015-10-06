@@ -19,7 +19,6 @@
   <!-- Latest compiled and minified JavaScript -->
   <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 
-
   <!-- Include the Quill library -->
   <link rel="stylesheet" href="bower_components/quill/dist/quill.snow.css" />
   <script src="bower_components/quill/dist/quill.min.js"></script>
@@ -39,10 +38,10 @@
           <li role="presentation"><a href="#export" aria-controls="export" role="tab" data-toggle="tab">Export</a></li>
           <li role="presentation"><a href="#help" aria-controls="help" role="tab" data-toggle="tab">Help</a></li>
           <li role="presentation"><a href="#about" aria-controls="about" role="tab" data-toggle="tab">About</a></li>
-
         </ul>
       </div>
-      <div id="teste" class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2">
+      
+      <div id="main-content" class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2">
         <!-- Tab panes -->
         <div class="tab-content">
           <div role="tabpanel" class="tab-pane active" id="home">
@@ -63,24 +62,40 @@
                   </div>
                 </div>
               </div>
-              <div class="panel-body">
-                <p>...</p>
-              </div>
-            
               <!-- List group -->
-              <ul class="list-group">
-                <li class="list-group-item">Cras justo odio</li>
-                <li class="list-group-item">Dapibus ac facilisis in</li>
-                <li class="list-group-item">Morbi leo risus</li>
-                <li class="list-group-item">Porta ac consectetur ac</li>
-                <li class="list-group-item">Vestibulum at eros</li>
-              </ul>
+              <div class="list-group">
+                <a class="list-group-item" href="#expand-test1" data-toggle="collapse" aria-expanded="false" aria-controls="expand-test1">
+                  <h4 class="list-group-item-heading">Template Title 1</h4>
+                  <p class="list-group-item-text">Content as plain text</p>
+                </a>
+                <div class="collapse" id="expand-test1">
+                  <p>Aqui vem o resto do texto do template</p>
+                </div>
+                
+                <a class="list-group-item" href="#expand-test2" data-toggle="collapse" aria-expanded="false" aria-controls="expand-test2">
+                  <h4 class="list-group-item-heading">Template Title 2</h4>
+                  <p class="list-group-item-text">Content as plain text</p>
+                </a>
+                <div class="collapse" id="expand-test2">
+                  <p>Aqui vem o resto do texto do template</p>
+                </div>
+                
+                <a class="list-group-item" href="#expand-test3" data-toggle="collapse" aria-expanded="false" aria-controls="expand-test3">
+                  <h4 class="list-group-item-heading">Template Title 3</h4>
+                  <p class="list-group-item-text">Content as plain text</p>
+                </a>
+                <div class="collapse" id="expand-test3">
+                  <p>Aqui vem o resto do texto do template</p>
+                </div>
+              </div>
+              
             </div>
           </div>
-          <div role="tabpanel" class="tab-pane" id="import">prof</div>
-          <div role="tabpanel" class="tab-pane" id="export">mes</div>
-          <div role="tabpanel" class="tab-pane" id="help">set</div>
-          <div role="tabpanel" class="tab-pane" id="about">about</div>
+          
+          <div role="tabpanel" class="tab-pane" id="import">Importing templates will be available soon!</div>
+          <div role="tabpanel" class="tab-pane" id="export">Exporting templates will be available soon!</div>
+          <div role="tabpanel" class="tab-pane" id="help">Help me!!!</div>
+          <div role="tabpanel" class="tab-pane" id="about">Hello!</div>
         </div>
       </div>
     </div>

@@ -12,6 +12,7 @@ $(document).ready(function() {
             bootbox.dialog({
                 message: data,
                 title: '<input type="text" id="text-editor-title" placeholder="Template Title">',
+                size: "large",
                 onEscape: function() {},
                 show: true,
                 backdrop: true,

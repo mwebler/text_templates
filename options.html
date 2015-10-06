@@ -1,7 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
+<!DOCTYPE html><html lang="en"><head>
   <title>TextTemplates</title>
 
   <meta charset="utf-8">
@@ -18,7 +15,13 @@
 
   <!-- Latest compiled and minified JavaScript -->
   <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-  <script src="bower_components/ckeditor/ckeditor.js"></script>
+
+  
+  <!-- Include the Quill library -->
+  <link rel="stylesheet" href="bower_components/quill/dist/quill.snow.css" />
+  <script src="bower_components/quill/dist/quill.min.js"></script>
+  
+  <script src="bower_components/bootbox.js/bootbox.js"></script>
 
   <link rel="stylesheet" href="css/styles.css">
 </head>
@@ -44,10 +47,10 @@
 
                 <div class="navbar navbar-toolbar navbar-default">
                   <ul class="nav navbar-nav navbar-left">
-                    <li><a href="#editor">
+                    <li><button id="new-template" class="btn btn-primary">
                           <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>
                           New Template
-                        </a>
+                        </button>
                     </li>
                   </ul>
                   <form class="navbar-form navbar-right" role="search">
@@ -63,17 +66,24 @@
           <div role="tabpanel" class="tab-pane" id="help">set</div>
           <div role="tabpanel" class="tab-pane" id="about">about</div>
           <div role="tabpanel" class="tab-pane" id="editor">
-            <textarea name="editor1" id="editor1" rows="10" cols="80">
-                This is my textarea to be replaced with CKEditor.
-            </textarea>
-            <script>
-                // Replace the <textarea id="editor1"> with a CKEditor
-                // instance, using default configuration.
-                CKEDITOR.replace( 'editor1' );
-            </script>
-        <button id="savetext">
+           
+
+            <button id="savetext">
               Salvar
             </button>
+            
+            
+            <!-- Large modal -->
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-lg">Large modal</button>
+
+<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+       <iframe src="editor.html"></iframe>
+    </div>
+  </div>
+</div>
+
           </div>
         </div>
       </div>
@@ -81,6 +91,7 @@
   </div>
 
   <script src="js/main.js"></script>
-</body>
 
-</html>
+  
+
+</body></html>

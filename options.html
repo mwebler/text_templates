@@ -25,7 +25,10 @@
 
   <script src="bower_components/bootbox.js/bootbox.js"></script>
   
-  <script type="text/javascript" src="bower_components/tinymce/tinymce.min.js"></script>
+  <script type="text/javascript" src="bower_components/tinymce/tinymce.jquery.js"></script>
+  <script type="text/javascript" src="bower_components/tinymce/tinymce.jquery.min.js"></script>
+  <script type="text/javascript" src="bower_components/tinymce/jquery.tinymce.min.js"></script>
+  <script type="text/javascript" src="bower_components/tinymce/tinymce.js"></script>
 
   <link rel="stylesheet" href="css/styles.css">
 </head>
@@ -35,7 +38,7 @@
     <div class="row">
       <div class="col-sm-3 col-md-2 sidebar">
         <ul class="nav nav-sidebar">
-          <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">My Templates</a></li>
+          <li role="presentation"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">My Templates</a></li>
           <li role="presentation"><a href="#import" aria-controls="import" role="tab" data-toggle="tab">Import</a></li>
           <li role="presentation"><a href="#export" aria-controls="export" role="tab" data-toggle="tab">Export</a></li>
           <li role="presentation"><a href="#help" aria-controls="help" role="tab" data-toggle="tab">Help</a></li>
@@ -65,30 +68,9 @@
                 </div>
               </div>
               <!-- List group -->
-              <div class="list-group">
-                <a class="list-group-item" href="#expand-test1" data-toggle="collapse" aria-expanded="false" aria-controls="expand-test1">
-                  <h4 class="list-group-item-heading">Template Title 1</h4>
-                  <p class="list-group-item-text">Content as plain text</p>
-                </a>
-                <div class="collapse" id="expand-test1">
-                  <p>Aqui vem o resto do texto do template</p>
-                </div>
+              <div id="template-list" class="list-group">
                 
-                <a class="list-group-item" href="#expand-test2" data-toggle="collapse" aria-expanded="false" aria-controls="expand-test2">
-                  <h4 class="list-group-item-heading">Template Title 2</h4>
-                  <p class="list-group-item-text">Content as plain text</p>
-                </a>
-                <div class="collapse" id="expand-test2">
-                  <p>Aqui vem o resto do texto do template</p>
-                </div>
                 
-                <a class="list-group-item" href="#expand-test3" data-toggle="collapse" aria-expanded="false" aria-controls="expand-test3">
-                  <h4 class="list-group-item-heading">Template Title 3</h4>
-                  <p class="list-group-item-text">Content as plain text</p>
-                </a>
-                <div class="collapse" id="expand-test3">
-                  <p>Aqui vem o resto do texto do template</p>
-                </div>
               </div>
               
             </div>

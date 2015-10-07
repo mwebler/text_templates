@@ -5,15 +5,18 @@ $(document).ready(function() {
     });
 });
 
+var cont = 0;
 $(document).ready(function() {
     $("#new-template").click(function() {
-        $.get("editor.html").success(function(data) {
-            console.log(data);
-            bootbox.dialog({
-                message: data,
+        
+        cont++;
+        bootbox.dialog({
+                message: '<textarea id="text-editor-input"></textarea>',
                 title: '<input type="text" id="text-editor-title" placeholder="Template Title">',
                 size: "large",
-                onEscape: function() {},
+                onEscape: function() {
+                    tinymce.EditorManager.execCommand('mceRemoveEditor',true, "text-editor-input");
+                },
                 show: true,
                 backdrop: true,
                 closeButton: true,
@@ -21,31 +24,27 @@ $(document).ready(function() {
                 buttons: {
                     "Save": {
                         className: "btn-success btn-block",
-                        callback: function() {}
+                        callback: function() {
+                            
+                            tinymce.EditorManager.execCommand('mceRemoveEditor',true, "text-editor-input");
+                        }
                     },
 
                     "Cancel": {
                         className: "btn-danger btn-block",
-                        callback: function() {}
+                        callback: function() {
+                            tinymce.EditorManager.execCommand('mceRemoveEditor',true, "text-editor-input");
+                        }
                     },
                 }
             });
-
-            /* global Quill*/
-            var fullEditor = new Quill('#text-editor-input', {
-                modules: {
-                    'toolbar': {
-                        container: '#text-editor-toolbar'
-                    },
-                    'link-tooltip': true
-                },
-                theme: 'snow'
-            });
+            
 
 
-        });
-
+            /* global tinymce */
+            tinymce.init({
+                selector: "#text-editor-input",
+                min_height: 300});
 
     });
-
 });

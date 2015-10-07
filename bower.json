@@ -8,6 +8,7 @@
   "dependencies": {
     "bootstrap": "~3.3.5",
     "quill": "~0.19.10",
-    "bootbox.js": "~4.4.0"
+    "bootbox.js": "~4.4.0",
+    "tinymce": "~4.2.6"
   }
 }

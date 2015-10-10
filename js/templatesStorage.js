@@ -8,18 +8,33 @@ text - template content
 */
 
 var templatesStorage = (function () {
+    var templates = 'templates';
 
     function getById(id){
     
     }
     
-    function getAll(){
-        
+    function getAll(callback){
+        chrome.storage.sync.get(templates, function(items) {
+            if(chrome.runtime.lastError){
+                callback([]);
+            }
+            else{
+                callback(items[templates]);
+            }
+        });
     }
 
     function update(template){
-        //if exists template with same id, update it
-        // else create a new one
+        chrome.storage.sync.get(templates, function(items) {
+            if(chrome.runtime.lastError){
+                return;
+            }
+            else{
+                items[templates].push(template);
+                chrome.storage.sync.set(items);
+            }
+        });
     }
     
     function deleteById(id){

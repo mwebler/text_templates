@@ -1,4 +1,6 @@
 QUnit.test( "Create and get (plain-text)", function( assert ) {
+    var done = assert.async();
+    
     var template = {
         id: "0123456789", 
         title:"my first template", 
@@ -7,7 +9,9 @@ QUnit.test( "Create and get (plain-text)", function( assert ) {
 
     templatesStorage.update(template);
     
-    var get_template = templatesStorage.getById(template.id);
+    templatesStorage.getById(template.id, function(get_template){
+        assert.deepEqual( get_template, template, "Read tempalte different from inserted template" );
+        done();
+    });
     
-    assert.deepEqual( template, get_template, "Read tempalte different from inserted template" );
 });

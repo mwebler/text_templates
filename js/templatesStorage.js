@@ -10,8 +10,20 @@ text - template content
 var templatesStorage = (function () {
     var templates = 'templates';
 
-    function getById(id){
-    
+    function getById(id, callback){
+        chrome.storage.sync.get(templates, function(items) {
+            if(chrome.runtime.lastError){
+                callback([]);
+            }
+            else{
+                var item = items[templates].filter(function( obj ) {
+                    return obj.id == id;
+                });
+                if(item.length == 1)
+                    item = item[0];
+                callback(item);
+            }
+        });
     }
     
     function getAll(callback){
@@ -31,8 +43,11 @@ var templatesStorage = (function () {
                 return;
             }
             else{
-                items[templates].push(template);
-                chrome.storage.sync.set(items);
+                var t = [];
+                t.push(template);
+                var x = {'templates': t};
+                
+                chrome.storage.sync.set(x);
             }
         });
     }

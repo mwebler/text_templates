@@ -124,7 +124,14 @@ var templatesStorage = (function () {
                 deferred.reject('failed removing all templates from storage');
             }
             else{
-                deferred.resolve();
+                chrome.storage.sync.remove(storageUid, function(){
+                    if(chrome.runtime.lastError){
+                        deferred.reject('failed removing uid from storage');
+                    }
+                    else{
+                        deferred.resolve();
+                    }
+                });
             }
         });
         
@@ -146,7 +153,9 @@ var templatesStorage = (function () {
                     next_uid = 1;
                 else
                     next_uid = last_uid + 1;
-                chrome.storage.sync.set({storageUid: next_uid});
+                var obj = {};
+                obj[storageUid] = next_uid;
+                chrome.storage.sync.set(obj);
             }
             deferred.resolve(next_uid);
         });

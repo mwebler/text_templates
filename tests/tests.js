@@ -76,6 +76,26 @@ QUnit.test( "Create two and get all (plain-text)", function( assert ) {
     templatesStorage.deleteAll().then(do_test);
 });
 
+QUnit.test( "Check uid generation", function( assert ) {
+    assert.expect(3);
+    var done = assert.async();
+    
+    function do_test(){
+        
+        var expected_uid = 1;
+    
+        function inc_uid(uid){
+            assert.equal(uid, expected_uid, 'received uid differs from expected' );
+            expected_uid++;
+            return templatesStorage.getUid();
+        }
+        
+        templatesStorage.getUid().then(inc_uid).then(inc_uid).then(inc_uid).then(done);
+    }
+    
+    templatesStorage.deleteAll().then(do_test);
+});
+
 QUnit.done(function( details ) {
     templatesStorage.deleteAll();
 });

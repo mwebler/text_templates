@@ -76,6 +76,40 @@ QUnit.test( "Create two and get all (plain-text)", function( assert ) {
     templatesStorage.deleteAll().then(do_test);
 });
 
+QUnit.test( "Create two and delete by id (plain-text)", function( assert ) {
+    assert.expect(1);
+    var done = assert.async();
+    
+    function do_test(){
+    
+        var template = {
+            title:"test 2", 
+            type:"plain-text", 
+            text:"Template content"};
+            
+        function add(){
+            return templatesStorage.update(template);
+        }
+        function del(t){
+            return templatesStorage.deleteById(t.id);
+        }
+            
+        add().then(add).then(del).then(function(){
+            var getPromise = templatesStorage.getAll();
+            getPromise.done(function(get_templates){
+                assert.equal( get_templates.length, 1, "Insert and read all templates failed" );
+                done();
+            });
+            
+            getPromise.fail(function(msg){
+                assert.ok(false, msg);
+            });
+        });
+    }
+    
+    templatesStorage.deleteAll().then(do_test);
+});
+
 QUnit.test( "Check uid generation", function( assert ) {
     assert.expect(3);
     var done = assert.async();

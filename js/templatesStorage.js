@@ -70,8 +70,10 @@ var templatesStorage = (function () {
     }
 
     /* Add a new template or update if there is already one with same ID */
-    function update(template){
+    function update(t){
         var deferred = $.Deferred();
+        
+        var template = $.extend(true, {}, t);
         
         var update_template = function(){
             var getPromise = getAll();
@@ -112,7 +114,27 @@ var templatesStorage = (function () {
     
     /* Delete item object that match the ID */
     function deleteById(id){
+        var deferred = $.Deferred();
         
+        var getPromise = getAll();
+            
+        getPromise.done(function(templates){
+            templates = templates.filter(function( obj ) {
+                return obj.id !== id;
+            });
+            var obj = {};
+            obj[storageTemplates] = templates;
+            
+            chrome.storage.sync.set(obj, function(){
+                deferred.resolve();
+            });
+        });
+        
+        getPromise.fail(function(){
+            deferred.reject('failed to insert template into storage');
+        });
+        
+        return deferred.promise();
     }
     
     /* Delete all the templates from storage */

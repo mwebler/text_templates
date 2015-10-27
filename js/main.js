@@ -23,6 +23,8 @@ $(document).ready(function() {
                   callback: function() {
                       save_content();
                       close_tinymce();
+                      //Workaroud, wait 0,5s to update list
+                      setTimeout(update_template_list, 500);
                   }
               },
 
@@ -55,28 +57,14 @@ function save_content(){
   var content = tinyMCE.activeEditor.getContent();
   var raw_content = tinyMCE.activeEditor.getContent({format : 'raw'});
   
-  var template = {title: title, content: content, raw: raw_content};
+  var template = {
+      title: title, 
+      type: "plain-text", 
+      text: raw_content};
   
-  // Save it using the Chrome extension storage API.
-  chrome.storage.sync.get("templates", function(items) {
-    var templates;
-    if($.isEmptyObject(items))
-      templates = [];
-    else
-       templates = items.templates;
-    templates.push(template);
-    
-    templates.sort(function(a, b){
-      if(a.title < b.title) return -1;
-      if(a.title > b.title) return 1;
-      return 0;
-    });
-    
-    chrome.storage.sync.set({"templates": templates}, function() {
-      update_template_list();
-    });
+  templatesStorage.update(template).then(function(t){
+    //check for error or succes?
   });
-  
 }
 
 function build_list_item(title){
@@ -86,14 +74,13 @@ function build_list_item(title){
 }
 
 function get_template_list(callback){
-  chrome.storage.sync.get("templates", function(items) {
-    if($.isEmptyObject(items) || chrome.runtime.lastError)
+  templatesStorage.getAll().done(function(items) {
+    if(items.length == 0)
       return;
     
-    var templates = items.templates;
     var html_list = "";
     
-    templates.forEach(function(template){
+    items.forEach(function(template){
       html_list = html_list + build_list_item(template.title);
     });
     
@@ -103,10 +90,11 @@ function get_template_list(callback){
 
 function update_template_list(){
   get_template_list(function(list){
-    $("#template-list").html(list);
+      $("#template-list").html(list);
   });
 }
 
+/* Each time a tab is selected */
 $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
   var target = $(e.target).attr("href"); // activated tab
   if(target == "#home"){
@@ -114,5 +102,13 @@ $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
   }
 });
 
-
-
+$(document).ready(function () {
+    $('#filter').keyup(function () {
+        var rex = new RegExp($(this).val(), 'i');
+        $('.list-group-item').hide();
+        $('.list-group-item').filter(function () {
+            return rex.test($(this).text());
+        }).show();
+    
+    });
+});

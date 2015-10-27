@@ -130,6 +130,43 @@ QUnit.test( "Check uid generation", function( assert ) {
     templatesStorage.deleteAll().then(do_test);
 });
 
+QUnit.test( "Create and update template (plain-text)", function( assert ) {
+    assert.expect(2);
+    var done = assert.async();
+    
+    function do_test(){
+    
+        var template = {
+            title:"test 2", 
+            type:"plain-text", 
+            text:"Template content"};
+            
+        function add(){
+            return templatesStorage.update(template);
+        }
+            
+        add().then(function(t){
+            template.id = t.id;
+            template.text = "content changed";
+            add().then(function(t){
+               var getPromise = templatesStorage.getAll();
+               getPromise.done(function(get_templates){
+                   assert.equal( get_templates.length, 1, "Length different than expected" );
+                   var get_template = get_templates[0];
+                   assert.equal( get_template.text, template.text, "Text different than expected" );
+                   done();
+               });
+               
+               getPromise.fail(function(msg){
+                   assert.ok(false, msg);
+               }); 
+            });
+        });
+    }
+    
+    templatesStorage.deleteAll().then(do_test);
+});
+
 QUnit.done(function( details ) {
     templatesStorage.deleteAll();
 });

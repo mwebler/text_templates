@@ -79,6 +79,11 @@ var templatesStorage = (function () {
             var getPromise = getAll();
             
             getPromise.done(function(templates){
+                /* remove to overwrite if id already exists */
+                templates = templates.filter(function( obj ) {
+                    return obj.id !== template.id;
+                });
+                
                 templates.push(template);
                 var obj = {};
                 obj[storageTemplates] = templates;

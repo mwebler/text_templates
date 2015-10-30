@@ -67,10 +67,15 @@ function save_content(){
   });
 }
 
-function build_list_item(title){
-  return '<a class="list-group-item">' + 
-    '<h4 class="list-group-item-heading">' + title + '</h4>' +
-  '</a>';
+function build_list_item(id, title){
+  return '<a ' + 'id="'+id+'" href="#" class="list-group-item clearfix">' +
+           title +
+           
+             '<button type="button" class="btn btn-danger btn-sm pull-right">' +
+               '<span class="glyphicon glyphicon-trash" aria-hidden="true"></span>' +
+             '</button>' +
+           
+         '</a>';
 }
 
 function get_template_list(callback){
@@ -81,7 +86,7 @@ function get_template_list(callback){
     var html_list = "";
     
     items.forEach(function(template){
-      html_list = html_list + build_list_item(template.title);
+      html_list = html_list + build_list_item(template.id, template.title);
     });
     
     callback(html_list);
@@ -103,6 +108,22 @@ $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
 });
 
 $(document).ready(function () {
+    
+    $("#template-list").on('click', 'a.list-group-item', function(e) {
+        e.preventDefault();
+        var node = $(e.target).prop('nodeName');
+        if(node == 'BUTTON'){
+            var id = $(e.target).prev().attr("id");
+            alert('clicked: ' + id + '   ' + node);
+        }
+        else{
+            var id = $(e.target).attr("id");
+            alert('clicked: ' + id + '   ' + node);
+        }
+        return false;  
+    });
+    
+    
     $('#filter').keyup(function () {
         var rex = new RegExp($(this).val(), 'i');
         $('.list-group-item').hide();

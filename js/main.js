@@ -108,10 +108,19 @@ function close_tinymce(){
   tinymce.EditorManager.execCommand('mceRemoveEditor',true, "text-editor-input");
 }
 
+function compare_title(a, b){
+    if (a.title < b.title)
+        return -1;
+    if (a.title > b.title)
+        return 1;
+    return 0;
+}
+
 function get_template_list(callback){
   templatesStorage.getAll().done(function(items) {
     if(items.length == 0)
       return;
+    items.sort(compare_title);
     var html_list = {'templates': items};
     
     callback(html_list);

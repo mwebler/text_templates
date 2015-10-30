@@ -32,6 +32,16 @@ function save_template(template){
   });
 }
 
+function delete_template(id){
+    templatesStorage.deleteById(id).then(function(){
+       bootbox.alert({ 
+           size: 'small',
+           message: "Template succesfully deleted"
+       });
+       setTimeout(update_template_list, 500);
+    });
+}
+
 function create_editor(title, content, save_callback, cancel_callback){
     var dialog = bootbox.dialog({
         message: '<textarea id="text-editor-input"></textarea>',
@@ -137,7 +147,7 @@ $(document).ready(function () {
         var target = $(e.target).closest('a.list-group-item');
         var id = target.attr("id");
         if(del){
-            alert('delete: ' + id);
+            delete_template(id);
         }
         else{
             templatesStorage.getById(id).done(function(item) {

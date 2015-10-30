@@ -125,7 +125,7 @@ var templatesStorage = (function () {
             
         getPromise.done(function(templates){
             templates = templates.filter(function( obj ) {
-                return obj.id !== id;
+                return obj.id != id;
             });
             var obj = {};
             obj[storageTemplates] = templates;

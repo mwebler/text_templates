@@ -3,8 +3,37 @@ $(document).ready(function() {
   $('.nav-sidebar a[href="#home"]').tab('show');
 });
 
-function create_editor(initial_content){
-    bootbox.dialog({
+function edit_template(template){
+    var new_template = template;
+    function save(title, content){
+        new_template.title = title;
+        new_template.text = content;
+        save_template(template);
+    }
+    create_editor(template.title, template.text, save, null);
+}
+
+function create_template(){
+    function save(title, content){
+        var template = {
+            title: title, 
+            type: "plain-text", 
+            text: content};
+        save_template(template);
+    }
+    
+    create_editor(null, null, save, null);
+}
+
+function save_template(template){
+  templatesStorage.update(template).then(function(t){
+    //Workaroud, wait 0,5s to update list
+    setTimeout(update_template_list, 500);
+  });
+}
+
+function create_editor(title, content, save_callback, cancel_callback){
+    var dialog = bootbox.dialog({
         message: '<textarea id="text-editor-input"></textarea>',
         title: '<input type="text" id="text-editor-title" placeholder="Template Title">',
         size: "large",
@@ -19,30 +48,41 @@ function create_editor(initial_content){
             "Save": {
                 className: "btn-success btn-block",
                 callback: function() {
-                    save_content();
+                    if(save_callback){
+                        var title = $("#text-editor-title").val();
+                        var raw_content = tinyMCE.activeEditor.getContent({format : 'raw'});
+                        save_callback(title, raw_content);
+                    }
                     close_tinymce();
-                    //Workaroud, wait 0,5s to update list
-                    setTimeout(update_template_list, 500);
                 }
             },
 
             "Cancel": {
                 className: "btn-danger btn-block",
                 callback: function() {
+                    if(cancel_callback){
+                        var title = $("#text-editor-title").val();
+                        var raw_content = tinyMCE.activeEditor.getContent({format : 'raw'});
+                        cancel_callback(title, content);
+                    }
                     close_tinymce();
                 }
             },
         }
     });
-    if(initial_content){
-        $("textarea#text-editor-input").val(initial_content);
+    if(content){
+        $("textarea#text-editor-input").val(content);
+    }
+    if(title){
+        $("input#text-editor-title").val(title);
     }
     init_tinymce();
+    return dialog;
 }
 
 $(document).ready(function() {
     $("#new-template").click(function() {
-        create_editor();
+        create_template();
     });
 });
 
@@ -56,21 +96,6 @@ function init_tinymce(){
 
 function close_tinymce(){
   tinymce.EditorManager.execCommand('mceRemoveEditor',true, "text-editor-input");
-}
-
-function save_content(){
-  var title = $("#text-editor-title").val();
-  var content = tinyMCE.activeEditor.getContent();
-  var raw_content = tinyMCE.activeEditor.getContent({format : 'raw'});
-  
-  var template = {
-      title: title, 
-      type: "plain-text", 
-      text: raw_content};
-  
-  templatesStorage.update(template).then(function(t){
-    //check for error or succes?
-  });
 }
 
 function get_template_list(callback){
@@ -116,7 +141,7 @@ $(document).ready(function () {
         }
         else{
             templatesStorage.getById(id).done(function(item) {
-              create_editor(item.text);
+              edit_template(item);
             });
         }
         return false;  

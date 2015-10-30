@@ -3,41 +3,46 @@ $(document).ready(function() {
   $('.nav-sidebar a[href="#home"]').tab('show');
 });
 
+function create_editor(initial_content){
+    bootbox.dialog({
+        message: '<textarea id="text-editor-input"></textarea>',
+        title: '<input type="text" id="text-editor-title" placeholder="Template Title">',
+        size: "large",
+        onEscape: function() {
+            close_tinymce();
+        },
+        show: true,
+        backdrop: true,
+        closeButton: true,
+        animate: true,
+        buttons: {
+            "Save": {
+                className: "btn-success btn-block",
+                callback: function() {
+                    save_content();
+                    close_tinymce();
+                    //Workaroud, wait 0,5s to update list
+                    setTimeout(update_template_list, 500);
+                }
+            },
+
+            "Cancel": {
+                className: "btn-danger btn-block",
+                callback: function() {
+                    close_tinymce();
+                }
+            },
+        }
+    });
+    if(initial_content){
+        $("textarea#text-editor-input").val(initial_content);
+    }
+    init_tinymce();
+}
+
 $(document).ready(function() {
     $("#new-template").click(function() {
-        
-        bootbox.dialog({
-          message: '<textarea id="text-editor-input"></textarea>',
-          title: '<input type="text" id="text-editor-title" placeholder="Template Title">',
-          size: "large",
-          onEscape: function() {
-              close_tinymce();
-          },
-          show: true,
-          backdrop: true,
-          closeButton: true,
-          animate: true,
-          buttons: {
-              "Save": {
-                  className: "btn-success btn-block",
-                  callback: function() {
-                      save_content();
-                      close_tinymce();
-                      //Workaroud, wait 0,5s to update list
-                      setTimeout(update_template_list, 500);
-                  }
-              },
-
-              "Cancel": {
-                  className: "btn-danger btn-block",
-                  callback: function() {
-                      close_tinymce();
-                  }
-              },
-          }
-      });
-      
-      init_tinymce();
+        create_editor();
     });
 });
 
@@ -45,7 +50,8 @@ function init_tinymce(){
   /* global tinymce */
   tinymce.init({
     selector: "#text-editor-input",
-    min_height: 300});
+    min_height: 300
+  });
 }
 
 function close_tinymce(){
@@ -99,13 +105,19 @@ $(document).ready(function () {
     $("#template-list").on('click', 'a.list-group-item', function(e) {
         e.preventDefault();
         var node = $(e.target).prop('nodeName');
-        if(node == 'BUTTON'){
-            var id = $(e.target).prev().attr("id");
-            alert('clicked: ' + id + '   ' + node);
+        var del;
+        if(node == 'BUTTON' || node == 'SPAN'){
+            del = true;
+        }
+        var target = $(e.target).closest('a.list-group-item');
+        var id = target.attr("id");
+        if(del){
+            alert('delete: ' + id);
         }
         else{
-            var id = $(e.target).attr("id");
-            alert('clicked: ' + id + '   ' + node);
+            templatesStorage.getById(id).done(function(item) {
+              create_editor(item.text);
+            });
         }
         return false;  
     });

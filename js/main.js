@@ -67,27 +67,11 @@ function save_content(){
   });
 }
 
-function build_list_item(id, title){
-  return '<a ' + 'id="'+id+'" href="#" class="list-group-item clearfix">' +
-           title +
-           
-             '<button type="button" class="btn btn-danger btn-sm pull-right">' +
-               '<span class="glyphicon glyphicon-trash" aria-hidden="true"></span>' +
-             '</button>' +
-           
-         '</a>';
-}
-
 function get_template_list(callback){
   templatesStorage.getAll().done(function(items) {
     if(items.length == 0)
       return;
-    
-    var html_list = "";
-    
-    items.forEach(function(template){
-      html_list = html_list + build_list_item(template.id, template.title);
-    });
+    var html_list = {'templates': items};
     
     callback(html_list);
   });
@@ -95,7 +79,10 @@ function get_template_list(callback){
 
 function update_template_list(){
   get_template_list(function(list){
-      $("#template-list").html(list);
+      var template = $('#tmpl-template-list').html();
+      Mustache.parse(template);   // optional, speeds up future uses
+      var rendered = Mustache.render(template, list);
+      $('#template-list').html(rendered);
   });
 }
 

@@ -29,6 +29,7 @@
   <script type="text/javascript" src="bower_components/tinymce/tinymce.jquery.min.js"></script>
   <script type="text/javascript" src="bower_components/tinymce/jquery.tinymce.min.js"></script>
   <script type="text/javascript" src="bower_components/tinymce/tinymce.js"></script>
+  <script type="text/javascript" src="bower_components/mustache.js/mustache.min.js"></script>
 
   <link rel="stylesheet" href="css/styles.css">
 </head>
@@ -70,6 +71,7 @@
               <!-- List group -->
               <div id="template-list" class="list-group">
                   
+               
               </div>
               
             </div>
@@ -83,6 +85,17 @@
       </div>
     </div>
   </div>
+  
+    <script id="tmpl-template-list" type="x-tmpl-mustache">
+        {{#templates}}
+        <a id={{id}} href="#" class="list-group-item clearfix">
+            {{title}}
+            <button type="button" class="btn btn-danger btn-sm pull-right">
+                <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+            </button>
+        </a>
+        {{/templates}}
+    </script>
 
   <script src="js/templatesStorage.js"></script>
   <script src="js/main.js"></script>

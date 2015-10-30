@@ -10,6 +10,7 @@
     "quill": "~0.19.10",
     "bootbox.js": "~4.4.0",
     "tinymce": "~4.2.6",
-    "qunit": "~1.19.0"
+    "qunit": "~1.19.0",
+    "mustache.js": "mustache#~2.2.0"
   }
 }
